@@ -1,0 +1,34 @@
+name: Rapport quotidien
+
+on:
+  schedule:
+    - cron: "30 7 * * 1-5"         # 7 h 30 du lundi au vendredi...
+      timezone: "Europe/Paris"     # ... heure de Paris, changement d'heure compris (depuis mars 2026)
+  workflow_dispatch:         # bouton « Run workflow » pour lancer à la main
+
+jobs:
+  report:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.13"
+          cache: pip
+      - run: pip install -e . -c constraints.txt
+      # Les données de démo s'arrêtent au 31/12/2025 : sans ce pas, l'historique serait « périmé »
+      # et le rapport sortirait chaque jour sans VaR (code 1). Même graine : l'historique existant
+      # ne change pas, seuls les jours manquants sont ajoutés (jamais commités : le disque est effacé).
+      - name: Prolonger les données synthétiques jusqu'à aujourd'hui
+        run: python -m quantlab.make_sample_data demo today
+      - name: Rapport
+        env:
+          QUANTLAB_SMTP_PASSWORD: ${{ secrets.QUANTLAB_SMTP_PASSWORD }}
+        run: python -m quantlab.pipelines.run_daily --config config/settings_demo.yaml  # données versionnées dans demo/
+      - uses: actions/upload-artifact@v7
+        if: always()                # même en cas d'échec : on veut les logs
+        with:
+          name: rapport-${{ github.run_id }}
+          path: |
+            demo/reports/
+            demo/logs/

@@ -1,0 +1,8 @@
+[
+  {"id": "T1", "type": "european", "underlying": "SX5E", "K": 5000, "T": 1.0, "notional": 200},
+  {"id": "T2", "type": "european", "underlying": "SX5E", "K": 4500, "T": 0.5, "call": false, "notional": -300},
+  {"id": "T3", "type": "digital", "underlying": "SX5E", "K": 5200, "T": 1.0, "notional": 500000},
+  {"id": "T4", "type": "barrier", "underlying": "SX5E", "K": 4900, "H": 6125, "T": 1.0, "notional": 100},
+  {"id": "T5", "type": "fx_option", "underlying": "EURUSD", "K": 1.20, "T": 0.5, "ccy": "USD", "notional": 10000000},
+  {"id": "T6", "type": "cpn", "underlying": "SX5E", "T": 5.0, "participation": 0.6, "S0": 4900.0, "notional": -10000000}
+]

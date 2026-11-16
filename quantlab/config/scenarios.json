@@ -1,0 +1,12 @@
+[
+  {"name": "Krach actions", "spot_shocks": {"SX5E": -0.30}, "vol_shocks": {"SX5E": 0.20},
+   "description": "Choc actions sévère, vol en hausse"},
+  {"name": "Stagflation", "spot_shocks": {"SX5E": -0.20}, "vol_shocks": {"SX5E": 0.10},
+   "curve_shocks": {"EUR": 150, "USD": 100}, "description": "Actions en baisse, taux en hausse"},
+  {"name": "Pentification EUR", "curve_shocks": {"EUR": {"0.25": 0, "2": 25, "10": 100}},
+   "description": "Court inchangé, long +100 bp"},
+  {"name": "Aplatissement EUR", "curve_shocks": {"EUR": {"0.25": 100, "2": 75, "10": 0}},
+   "description": "Court +100 bp, long inchangé"},
+  {"name": "Fuite vers le dollar", "spot_shocks": {"SX5E": -0.10, "EURUSD": -0.08},
+   "vol_shocks": {"SX5E": 0.08, "EURUSD": 0.04}, "curve_shocks": {"EUR": -50}}
+]

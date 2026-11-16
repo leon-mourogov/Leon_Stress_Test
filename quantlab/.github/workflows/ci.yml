@@ -1,0 +1,29 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  tests:
+    # Le projet doit marcher chez n'importe qui : on teste les trois systèmes,
+    # avec la plus ancienne et la plus récente version de Python supportées.
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false              # un échec sous Windows ne masque pas le résultat sous macOS
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        python-version: ["3.11", "3.14"]
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: pip
+      - name: Installer le package et les outils (versions testées)
+        run: pip install -e ".[dev]" -c constraints.txt
+      - name: Lint
+        run: ruff check src tests app
+      - name: Tests et couverture
+        run: pytest --cov=quantlab.pricing --cov=quantlab.risk --cov-fail-under=70

@@ -1,0 +1,9 @@
+# .gitattributes - fins de ligne identiques pour tout le monde, quel que soit le systeme.
+# Windows termine les lignes par CRLF, macOS et Linux par LF. Sans ce fichier, Git peut convertir
+# les fins de ligne a l'enregistrement, et un script bash en CRLF ne s'execute plus sous macOS/Linux.
+* text=auto eol=lf
+*.bat text eol=crlf
+*.png binary
+*.xlsx binary
+*.pdf binary
+*.db binary

@@ -1,0 +1,39 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "quantlab"
+version = "1.0.0"
+description = "Pricing, stress, VaR et backtest pour un book d'options actions / change"
+readme = "README.md"
+authors = [{ name = "Léon Mourogov" }]
+license = "MIT"
+license-files = ["LICENSE"]
+requires-python = ">=3.11"
+dependencies = [
+    "numpy", "pandas", "scipy", "matplotlib", "requests", "pyyaml", "sqlalchemy>=2", "openpyxl", "pydantic>=2",
+]
+
+[project.optional-dependencies]
+app = ["streamlit>=1.40"]
+api = ["fastapi>=0.110", "uvicorn"]
+dev = ["pytest", "pytest-cov", "ruff", "QuantLib", "quantlab[app,api]", "httpx"]
+scheduler = ["apscheduler>=3.10,<4"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+markers = ["slow: tests longs (pipeline complet)"]
+# avertissement interne à FastAPI (TestClient), sans effet sur le projet
+filterwarnings = ["ignore:Using `httpx` with `starlette.testclient`"]
+
+[tool.ruff]
+line-length = 110
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP"]

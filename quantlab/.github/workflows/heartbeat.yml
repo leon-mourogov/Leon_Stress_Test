@@ -1,0 +1,27 @@
+name: Heartbeat
+
+on:
+  schedule:
+    - cron: "30 8 * * 1-5"
+      timezone: "Europe/Paris"
+  workflow_dispatch:
+
+permissions:
+  actions: read          # lire l'historique des workflows, rien d'autre
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Le rapport de ce matin a-t-il réussi ?
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          today=$(TZ=Europe/Paris date +%F)
+          ok=$(gh run list -R "$GITHUB_REPOSITORY" --workflow daily.yml --created "$today" \
+               --status success --json databaseId --jq length)
+          if [ "$ok" -eq 0 ]; then
+            echo "::error::Aucun rapport réussi aujourd'hui ($today) : voir l'onglet Actions"
+            exit 1
+          fi
+          echo "Rapport du jour OK"

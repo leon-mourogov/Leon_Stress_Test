@@ -1,0 +1,9 @@
+[
+  {"type": "buy_hold"},
+  {"type": "sma", "params": {"fast": 50, "slow": 200}},
+  {"type": "sma", "params": {"fast": 20, "slow": 100}},
+  {"type": "sma", "params": {"fast": 50, "slow": 200, "short": true}},
+  {"type": "momentum", "params": {"lookback": 252, "skip": 21}},
+  {"type": "buy_hold", "vol_target": {"target": 0.10}},
+  {"type": "sma", "params": {"fast": 50, "slow": 200}, "vol_target": {"target": 0.10}}
+]

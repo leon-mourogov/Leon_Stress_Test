@@ -1,0 +1,2 @@
+# requirements.txt - pour Streamlit Community Cloud : installe le paquet quantlab du depot et ses dependances
+.[app]
