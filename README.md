@@ -1,6 +1,6 @@
 # quantlab
 
-![CI](https://github.com/leon-mourogov/quantlab/actions/workflows/ci.yml/badge.svg)
+![CI](https://github.com/leon-mourogov/Leon_Stress_Test/actions/workflows/ci.yml/badge.svg)
 
 Plateforme de risque pour un petit book d'options actions / change : elle importe des fichiers de prix
 (CSV ou Excel), valorise chaque position, calcule les Greeks, applique une bibliothèque de stress, une VaR
@@ -21,7 +21,7 @@ Python 3.11 à 3.14, testé en CI sous Windows, macOS et Linux.
 macOS / Linux :
 
 ```bash
-git clone https://github.com/leon-mourogov/quantlab.git && cd quantlab
+git clone https://github.com/leon-mourogov/Leon_Stress_Test.git && cd Leon_Stress_Test
 python3 -m venv .venv && source .venv/bin/activate && pip install -e ".[dev]" -c constraints.txt
 python -m quantlab.pipelines.run_daily --config config/settings_demo.yaml --date 2025-12-31 && streamlit run app/Pricer.py
 ```
@@ -29,7 +29,7 @@ python -m quantlab.pipelines.run_daily --config config/settings_demo.yaml --date
 Windows (PowerShell) :
 
 ```powershell
-git clone https://github.com/leon-mourogov/quantlab.git; cd quantlab
+git clone https://github.com/leon-mourogov/Leon_Stress_Test.git; cd Leon_Stress_Test
 py -m venv .venv; .venv\Scripts\Activate.ps1; pip install -e ".[dev]" -c constraints.txt
 python -m quantlab.pipelines.run_daily --config config/settings_demo.yaml --date 2025-12-31; streamlit run app/Pricer.py
 ```
